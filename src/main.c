@@ -16,7 +16,10 @@
 
 #define NUM_PWM_CHANS 4
 
-static nrfx_pwm_t my_pwm = NRFX_PWM_INSTANCE(1);
+static nrfx_pwm_t pwm0 = NRFX_PWM_INSTANCE(0);
+static nrfx_pwm_t pwm1 = NRFX_PWM_INSTANCE(1);
+static nrfx_pwm_t pwm2 = NRFX_PWM_INSTANCE(2);
+static nrfx_pwm_t pwm3 = NRFX_PWM_INSTANCE(3);
 
 static int pwm_init(void)
 {
@@ -36,7 +39,7 @@ static int pwm_init(void)
         .load_mode    = NRF_PWM_LOAD_INDIVIDUAL,
         .step_mode    = NRF_PWM_STEP_AUTO
     };
-    return (nrfx_pwm_init(&my_pwm, &config0, NULL, NULL) == NRFX_SUCCESS) ? 0 : -1;
+    return (nrfx_pwm_init(&pwm0, &config0, NULL, NULL) == NRFX_SUCCESS) ? 0 : -1;
 
 	// If PWM callbacks are to be used, remember to configure the interrupts correctly
 	//IRQ_DIRECT_CONNECT(PWM1_IRQn, 0, nrfx_pwm_1_irq_handler, 0);
@@ -49,7 +52,7 @@ static void pwm_set_duty_cycle(uint32_t* duty_cycles)
 
     // This array cannot be allocated on stack (hence "static") and it must be in RAM 
     static nrf_pwm_values_individual_t seq_values;
-    uint16_t *pwm_chan_seq = &seq_values; // point to the struct for loop increment instead
+    uint16_t *pwm_chan_seq = (uint16_t *)&seq_values; // point to the struct for loop increment instead
 
 	// Update the respective channels
     for(int pwm_chan=0; pwm_chan < NUM_PWM_CHANS; pwm_chan++)
@@ -65,7 +68,7 @@ static void pwm_set_duty_cycle(uint32_t* duty_cycles)
 
 	if(!pwm_running){
 		pwm_running = true;
-		(void)nrfx_pwm_simple_playback(&my_pwm, &seq, 1000, NRFX_PWM_FLAG_LOOP);
+		(void)nrfx_pwm_simple_playback(&pwm0, &seq, 1000, NRFX_PWM_FLAG_LOOP);
 	}
 }
 
@@ -85,7 +88,7 @@ int main(void)
     pwm_set_duty_cycle(duty_cycles);
 
 	while (1) {
-		static int counter = 0;
+		//static int counter = 0;
 		// pwm_set_duty_cycle(counter, PWM_COUNTERTOP - counter);
 		// counter = (counter + 1) % PWM_COUNTERTOP;
 		k_msleep(SLEEP_TIME_MS);
