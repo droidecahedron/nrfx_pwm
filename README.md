@@ -10,6 +10,3 @@ one instance, 4 outputs, varying duty cycles
 
 ## branch: multiple-instance
 multiple instances for distinct frequencies on each i/o
-
-## branch: waveform
-todo: have some arbitrary weird waveform using the waveform mode on 1 channel.

@@ -12,7 +12,7 @@
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS   50
 
-#define PWM_COUNTERTOP  100
+#define PWM_COUNTERTOP  10000
 
 #define NUM_PWM_CHANS 4
 
@@ -27,13 +27,13 @@ static int pwm_init(void)
             28,						// channel 0
             29,						// channel 1
             30,                 	// channel 2
-            31	                    // channel 3
+            NRF_PWM_PIN_NOT_CONNECTED	                    // channel 3 but waveform only does 3 at a time
         },
         .irq_priority = 5,
         .base_clock   = NRF_PWM_CLK_1MHz,
         .count_mode   = NRF_PWM_MODE_UP,
         .top_value    = PWM_COUNTERTOP,
-        .load_mode    = NRF_PWM_LOAD_INDIVIDUAL,
+        .load_mode    = NRF_PWM_LOAD_WAVE_FORM,
         .step_mode    = NRF_PWM_STEP_AUTO
     };
     return (nrfx_pwm_init(&my_pwm, &config0, NULL, NULL) == NRFX_SUCCESS) ? 0 : -1;
@@ -48,12 +48,25 @@ static void pwm_set_duty_cycle(uint32_t* duty_cycles)
 	static bool pwm_running = false;
 
     // This array cannot be allocated on stack (hence "static") and it must be in RAM 
-    static nrf_pwm_values_individual_t seq_values;
-    uint16_t *pwm_chan_seq = &seq_values; // point to the struct for loop increment instead
+    static nrf_pwm_values_wave_form_t seq_values;
+    seq_values.channel_0 = PWM_COUNTERTOP/10 | (1 << 15); //flips really early, inverted polarity
+    seq_values.channel_1 = PWM_COUNTERTOP/4;
+    seq_values.channel_2 = PWM_COUNTERTOP/2; // should flip half way through
+    seq_values.counter_top = PWM_COUNTERTOP;
 
-	// Update the respective channels
-    for(int pwm_chan=0; pwm_chan < NUM_PWM_CHANS; pwm_chan++)
-	    pwm_chan_seq[pwm_chan] = (duty_cycles[pwm_chan] <= PWM_COUNTERTOP) ? duty_cycles[pwm_chan] : PWM_COUNTERTOP;
+    //TESTING
+    // #define CYCLE_A  (2*1000)   // Some arbitrary number of clock cycles to match required resolution
+    // #define CYCLE_B  (2*2000)	// More clock cycles gets wider
+    // #define CYCLE_C  (2*3000)
+    // #define CYCLE_D  (2*4000)
+    // nrf_pwm_values_wave_form_t peculiarSequence[] = {
+    //     //   Index     Normal pin          Inverted     (Spare)  Top Value
+    //     //   =====     =================== ==========   =======  =========
+    //     { /*   0  */   0x8000|(CYCLE_A/2), (CYCLE_A/2), 0,       CYCLE_A  },
+    //     { /*   1  */   0x8000|(CYCLE_B/2), (CYCLE_B/2), 0,       CYCLE_B  },
+    //     { /*   2  */   0x8000|(CYCLE_C/2), (CYCLE_C/2), 0,       CYCLE_C  },
+    //     { /*   3  */   0x8000|(CYCLE_D/2), (CYCLE_D/2), 0,       CYCLE_D  },
+    // };
 
     nrf_pwm_sequence_t const seq =
     {
@@ -85,9 +98,6 @@ int main(void)
     pwm_set_duty_cycle(duty_cycles);
 
 	while (1) {
-		static int counter = 0;
-		// pwm_set_duty_cycle(counter, PWM_COUNTERTOP - counter);
-		// counter = (counter + 1) % PWM_COUNTERTOP;
 		k_msleep(SLEEP_TIME_MS);
 	}
 
