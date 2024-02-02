@@ -9,9 +9,12 @@ when using waveform mode you only get 3 output channels instead of 4.
 ## screenshot A
 one instance, 4 outputs, varying duty cycles
 ![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/fae9f85b-38fb-4c3f-90cf-1ec1746f04f2)
+You'll need to modify `config0` such that `NRF_PWM_PIN_NOT_CONNECTED` is 31 instead for LED4, the `load_mode` to be `NRF_PWM_LOAD_INDIVIDUAL`, and uncomment relevant sequence.
 
 ## screenshot B
 one instance, 3 outputs, using waveform mode.
+![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/7df6ae4f-cbe1-45a2-a41e-7b9e5412b2cf)
+
 
 ## screenshot C
 once instance, 3 outputs, same short pulse but delayed by a certain amount. (depends on count top, period, clk)
