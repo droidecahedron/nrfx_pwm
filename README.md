@@ -28,4 +28,4 @@ once instance, 3 outputs, same short pulse but delayed by a certain amount. (dep
 
 
 ### branch: multiple-instance
-multiple instances for distinct frequencies on each i/o. this branch is kind of unfinished because to generate the above screenshots only needed one instance.
+multiple instances for distinct frequencies on each i/o. this branch is kind of unfinished because to generate the above screenshots only needed one instance. (thanks @inductivekickback)
