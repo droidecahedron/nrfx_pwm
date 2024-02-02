@@ -1,10 +1,16 @@
 # nrfx_pwm
 
-Driving GPIO with PWM peripheral, using nrfx.
+## hardware / documentation
+- nRF5340DK / [nRF5340 doc](https://infocenter.nordicsemi.com/topic/struct_nrf53/struct/nrf5340.html), [nRF5340DK doc](https://infocenter.nordicsemi.com/index.jsp?topic=%2Fstruct_nrf53%2Fstruct%2Fnrf5340.html)
+<img src="https://github.com/droidecahedron/nrf-blueberry/assets/63935881/12612a0e-9f81-4431-8b22-f69704248f89" width=25% height=25%>
+
+Driving GPIO with PWM peripheral, using nrfx. (https://infocenter.nordicsemi.com/topic/ps_nrf5340/pwm.html?cp=4_0_0_6_22)
 LEDs chosen for visual feedback.
 
-in pwm_set_duty_cycle, there are three sequences labelled screenshot A, screenshot B, and screenshot C for some sample outputs.
+in `pwm_set_duty_cycle`, there are three sequences labelled screenshot A, screenshot B, and screenshot C for some sample outputs.
 when using waveform mode you only get 3 output channels instead of 4.
+
+You just change some of what you pass in that function (all commented) and you can get the below outputs.
 
 ## screenshot A
 one instance, 4 outputs, varying duty cycles
