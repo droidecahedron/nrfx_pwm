@@ -25,6 +25,7 @@ Boxed in red is header location if you want to measure the waveforms for yoursel
 > Note: Readme C code for sequences is formatted slightly differently to make visualizing the columns for each sequence easier.
 
 ### Sequence A
+Your run of the mill set-duty-cycle and forget
 ```c
  static nrf_pwm_values_individual_t sequence_A;          // sequence A is a pretty basic PWM duty cycle.
     sequence_A.channel_0 = PWM_COUNTERTOP / 10 | (1 << 15); // flips really early, inverted polarity
@@ -32,8 +33,6 @@ Boxed in red is header location if you want to measure the waveforms for yoursel
     sequence_A.channel_2 = PWM_COUNTERTOP / 2; // should flip half way through
     sequence_A.channel_3 = PWM_COUNTERTOP / 10;
 ```
-Your run of the mill set-duty-cycle and forget
-
 ![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/4da0ab1c-fee3-4455-a556-9f0a6c835236)
 
 ### Sequence B
@@ -59,7 +58,6 @@ Time delayed pulses that are off majority of the time (turn off by setting the v
         {PWM_COUNTERTOP, PWM_COUNTERTOP, PWM_COUNTERTOP, short_pulse},
     };
 ```
-
 ![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/7f51a016-47a0-49bc-8e2e-5cfbf823aefa)
 
 ### Sequence D
