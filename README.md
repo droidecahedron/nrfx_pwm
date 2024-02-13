@@ -12,6 +12,8 @@ when using waveform mode you only get 3 output channels instead of 4.
 
 You just change some of what you pass in that function (all commented) and you can get the below outputs.
 
+> You can address four pwm channels if you don't need to adjust countertop
+
 ## screenshot A
 one instance, 4 outputs, varying duty cycles
 ![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/fae9f85b-38fb-4c3f-90cf-1ec1746f04f2)
