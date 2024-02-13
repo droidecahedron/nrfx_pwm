@@ -14,6 +14,14 @@ You just change some of what you pass in that function (all commented) and you c
 
 > You can address four pwm channels if you don't need to adjust countertop
 
+![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/86076c67-dce1-4ebb-aa1a-80e0461b0765)
+
+GPIO 28-31 for PWM chans
+
+![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/e9ffa475-7a6f-4d53-829b-03adf76bd0a4)
+
+
+
 ## screenshot A
 one instance, 4 outputs, varying duty cycles
 ![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/fae9f85b-38fb-4c3f-90cf-1ec1746f04f2)
