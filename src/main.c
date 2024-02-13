@@ -77,18 +77,18 @@ static void pwm_set_duty_cycle(uint8_t sequence_id)
     // short pulses, then OFF.
     const uint16_t short_pulse = PWM_COUNTERTOP / 10 | (1 << 15);
     static nrf_pwm_values_individual_t sequence_C[] = {
-        {/*   0  */ short_pulse, PWM_COUNTERTOP, PWM_COUNTERTOP, PWM_COUNTERTOP},
-        {/*   1  */ PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP, PWM_COUNTERTOP},
-        {/*   2  */ PWM_COUNTERTOP, PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP},
-        {/*   3  */ PWM_COUNTERTOP, PWM_COUNTERTOP, PWM_COUNTERTOP, short_pulse},
+        {short_pulse, PWM_COUNTERTOP, PWM_COUNTERTOP, PWM_COUNTERTOP},
+        {PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP, PWM_COUNTERTOP},
+        {PWM_COUNTERTOP, PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP},
+        {PWM_COUNTERTOP, PWM_COUNTERTOP, PWM_COUNTERTOP, short_pulse},
     };
 
     const uint16_t long_pulse = PWM_COUNTERTOP / 2 | (1 << 15);
     static nrf_pwm_values_individual_t sequence_D[] = {
-        {/*   0  */ short_pulse, PWM_COUNTERTOP, long_pulse, PWM_COUNTERTOP},
-        {/*   1  */ PWM_COUNTERTOP, long_pulse, PWM_COUNTERTOP, short_pulse},
-        {/*   2  */ long_pulse, PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP},
-        {/*   3  */ PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP, long_pulse},
+        {short_pulse, PWM_COUNTERTOP, long_pulse, PWM_COUNTERTOP},
+        {PWM_COUNTERTOP, long_pulse, PWM_COUNTERTOP, short_pulse},
+        {long_pulse, PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP},
+        {PWM_COUNTERTOP, short_pulse, PWM_COUNTERTOP, long_pulse},
     };
 
     // sequence args for simple playback
