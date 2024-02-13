@@ -45,7 +45,7 @@ static nrf_pwm_values_individual_t sequence_B[] = {
         {CYCLE_A,                CYCLE_B,                CYCLE_C,                CYCLE_D},
     };
 ```
-![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/e2cf8786-9b89-46d3-a0c2-55cae73e3780)
+![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/fbb95208-715b-4190-b890-73898a80385f)
 
 ### Sequence C
 Time delayed pulses that are off majority of the time (turn off by setting the value to `COUNTERTOP` in the seq)
@@ -71,7 +71,7 @@ Time delayed pulses with alternating short and long pulses
         {PWM_COUNTERTOP, short_pulse,    PWM_COUNTERTOP, long_pulse},
     };
 ```
-![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/5bfb26a4-c83c-44dd-a5f3-4ded6e655d5a)
+![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/7215c7d4-12d8-4b8c-89c5-487535aa609b)
 
 
 # Extra Notes
