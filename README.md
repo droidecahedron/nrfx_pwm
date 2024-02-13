@@ -99,4 +99,5 @@ You can also have multiple PWM instances.
 
 ### branches:
 `multiple-instance` for distinct frequencies on each i/o. this branch is kind of unfinished because to generate the above screenshots only needed one instance. (thanks @inductivekickback)
+
 `snapshot_version` old version that has you manually change the structs you feed the playback fxn.
