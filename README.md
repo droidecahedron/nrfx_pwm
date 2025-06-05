@@ -27,11 +27,12 @@ Boxed in red is header location if you want to measure the waveforms for yoursel
 ### Sequence A
 Your run of the mill set-duty-cycle and forget
 ```c
- static nrf_pwm_values_individual_t sequence_A;          // sequence A is a pretty basic PWM duty cycle.
+ static nrf_pwm_values_individual_t sequence_A[] = {          // sequence A is a pretty basic PWM duty cycle.
     sequence_A.channel_0 = PWM_COUNTERTOP / 10 | (1 << 15); // flips really early, inverted polarity
     sequence_A.channel_1 = PWM_COUNTERTOP / 4;
     sequence_A.channel_2 = PWM_COUNTERTOP / 2; // should flip half way through
     sequence_A.channel_3 = PWM_COUNTERTOP / 10;
+    };
 ```
 ![image](https://github.com/droidecahedron/nrfx_pwm/assets/63935881/4da0ab1c-fee3-4455-a556-9f0a6c835236)
 
